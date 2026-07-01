@@ -10,7 +10,8 @@ export default function MasteryPage() {
   const stepX = chartWidth / (trendData.length - 1);
   const points = trendData.map((score, i) => ({ x: i * stepX, y: chartHeight - (score / 100) * chartHeight }));
   const pathD = points.map((p, i) => (i === 0 ? `M ${p.x} ${p.y}` : `L ${p.x} ${p.y}`)).join(' ');
-  const fillD = `${pathD} L ${points[points.length - 1].x} ${chartHeight} L 0 ${chartHeight} Z`;
+  const lastPoint = points[points.length - 1];
+  const fillD = lastPoint ? `${pathD} L ${lastPoint.x} ${chartHeight} L 0 ${chartHeight} Z` : pathD;
 
   return (
     <div className='flex flex-col h-full overflow-auto p-4 space-y-4'>
