@@ -44,8 +44,8 @@ export default function ReviewPage() {
     setParagraphs(sample); setAnswers(new Array(sample.length).fill('')); setCurrentIndex(0); setCurrentAnswer(''); setReviewResult(null);
   };
 
-  const handleNext = () => { const a = [...answers]; a[currentIndex] = currentAnswer; setAnswers(a); if (currentIndex < paragraphs.length - 1) { setCurrentIndex(currentIndex + 1); setCurrentAnswer(a[currentIndex + 1] || ''); } };
-  const handlePrevious = () => { const a = [...answers]; a[currentIndex] = currentAnswer; setAnswers(a); if (currentIndex > 0) { setCurrentIndex(currentIndex - 1); setCurrentAnswer(a[currentIndex - 1] || ''); } };
+  const handleNext = () => { const a = [...answers]; a[currentIndex] = currentAnswer; setAnswers(a); if (currentIndex < paragraphs.length - 1) { setCurrentIndex(currentIndex + 1); setCurrentAnswer(a[currentIndex + 1] ?? ''); } };
+  const handlePrevious = () => { const a = [...answers]; a[currentIndex] = currentAnswer; setAnswers(a); if (currentIndex > 0) { setCurrentIndex(currentIndex - 1); setCurrentAnswer(a[currentIndex - 1] ?? ''); } };
 
   const handleSubmit = async () => {
     const a = [...answers]; a[currentIndex] = currentAnswer; setAnswers(a); setIsSubmitting(true);
@@ -116,7 +116,7 @@ export default function ReviewPage() {
         <div className='text-xs text-base-content/50 text-center mt-1'>{currentIndex + 1} / {paragraphs.length}</div>
       </div>
       <div className='flex-1 overflow-auto p-4'>
-        <div className='bg-base-100 rounded-xl p-4 border border-base-300 mb-4'><p className='text-sm leading-relaxed'>{paragraphs[currentIndex]?.text}</p></div>
+        <div className='bg-base-100 rounded-xl p-4 border border-base-300 mb-4'><p className='text-sm leading-relaxed'>{paragraphs[currentIndex]?.text ?? ''}</p></div>
         <h3 className='font-semibold text-sm mb-2'>What does this paragraph mean?</h3>
         <p className='text-xs text-base-content/50 mb-3'>Describe what the author is expressing here.</p>
         <textarea className='textarea textarea-bordered w-full h-32 text-sm' placeholder='Write your recall here...' value={currentAnswer} onChange={(e) => setCurrentAnswer(e.target.value)} />
